@@ -231,6 +231,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Manifest\contoso20x20.png" />
     <Content Include="Manifest\contoso96x96.png" />
+    <Content Include="Manifest\FAQme-192x192.png" />
+    <Content Include="Manifest\FAQme-32x32.png" />
     <Content Include="Scripts\teamsapp.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
