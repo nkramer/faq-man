@@ -37,12 +37,12 @@ Thx.
 "),
                                 GetAttachment("API failed",
                 @"In order to give you a precise answer, could you clarify:
-The URL and http verb for the method of interest(eg: POST https://graph.microsoft.com/beta/teams/{id}/channels)
-Application permissions or user delegated permissions ?
-The request - id from a call thats failed within the last 24 hours (we only keep a few days of logs)
-The payload you passed in, and the payload you got back
-The http response code
-If it was a 401 or 403, why do you think this was a mistake? What permission scopes are you calling it with?
+- The URL and http verb for the method of interest (eg: POST https://graph.microsoft.com/beta/teams/{id}/channels)
+- Application permissions or user delegated permissions?
+- The request - id from a call thats failed within the last 24 hours (we only keep a few days of logs)
+- The payload you passed in, and the payload you got back
+- The http response code
+- If it was a 401 or 403, why do you think this was a mistake? What permission scopes are you calling it with?
 
 Thx.
 "),
@@ -56,9 +56,12 @@ Thx.
             //    attachments[i] = GetAttachment(title);
             //}
 
-            var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", "result"));
+            var response = new ComposeExtensionResponse(new ComposeExtensionResult(
+                attachmentLayout: "list", 
+                type: "result", 
+                attachments: attachments.ToList()));
+            //response.ComposeExtension.Attachments = attachments.ToList();
             //var response = new ComposeExtensionResponse(new ComposeExtensionResult("list", type: "message", text: "foo"));
-            response.ComposeExtension.Attachments = attachments.ToList();
             //response.ComposeExtension.Text = "faq me!";
 
             return response;
@@ -78,35 +81,131 @@ Thx.
     'version': '1.0'
 }";
 
+        //private static ComposeExtensionAttachment GetAttachment(string title, string body)
+        //{
+        //    var previewCard = new ThumbnailCard
+        //    {
+        //        Title = title,
+        //        Text = body,
+        //        //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+        //    };
+
+        //    return previewCard
+        //        .ToAttachment()
+        //        .ToComposeExtensionAttachment();
+        //}
+
+        //private static ComposeExtensionAttachment GetAttachment(string title, string body)
+        //{
+        //    var previewCard = new ThumbnailCard
+        //    {
+        //        Title = title,
+        //        Text = body,
+        //        //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+        //    };
+
+        //    var mainCard = new ThumbnailCard
+        //    {
+        //        Title = title,
+        //        Text = body,
+        //        //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+        //    };
+
+        //    return new ComposeExtensionAttachment(
+        //        //contentType: AdaptiveCard.ContentType, //HeroCard.ContentType,
+        //        //content: attachment,
+        //        contentType: ThumbnailCard.ContentType,
+        //        content: mainCard,
+        //        preview: previewCard.ToAttachment());
+        //}
+
         private static ComposeExtensionAttachment GetAttachment(string title, string body)
         {
-            string json = cardJson.Replace("**replace here**", body);
-            var parseResult = AdaptiveCard.FromJson(json);
-            var attachment = new Attachment
+            var previewCard = new ThumbnailCard
             {
-                ContentType = AdaptiveCard.ContentType,
-                Content = parseResult.Card,
+                Title = title,
+                Text = body,
+                //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
             };
-            attachment.Name = "name";
 
-            return attachment.ToComposeExtensionAttachment();
-            //return parseResult.Card.
+            string json = cardJson.Replace("**replace here**", body);
+            AdaptiveCard mainCard = AdaptiveCard.FromJson(json).Card;
 
-            //var welcomeMessage = Activity.CreateMessageActivity();
-            //welcomeMessage.Attachments.Add(attachment);
-
-
-            //var card = new A
-            //var card = new ThumbnailCard
-            //{
-            //    Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
-            //    Text = body,
-            //   //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
-            //};
-            
-            //return card
-            //    .ToAttachment()
-            //    .ToComposeExtensionAttachment();
+            return new ComposeExtensionAttachment(
+                //contentType: AdaptiveCard.ContentType, //HeroCard.ContentType,
+                //content: attachment,
+                contentType: AdaptiveCard.ContentType,
+                content: mainCard,
+                preview: previewCard.ToAttachment());
         }
+
+        //private static ComposeExtensionAttachment GetAttachment(string title, string body)
+        //{
+        //    string json = cardJson.Replace("**replace here**", body);
+        //    var parseResult = AdaptiveCard.FromJson(json);
+        //    var attachment = new Attachment
+        //    {
+        //        ContentType = AdaptiveCard.ContentType,
+        //        Content = parseResult.Card,
+        //    };
+        //    attachment.Name = "name";
+
+        //    var previewCard = new ThumbnailCard
+        //    {
+        //        Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
+        //        Text = body,
+        //        //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+        //    };
+
+        //    return new ComposeExtensionAttachment(
+        //        //contentType: AdaptiveCard.ContentType, //HeroCard.ContentType,
+        //        //content: attachment,
+        //        contentType: HeroCard.ContentType,
+        //        content: previewCard.ToAttachment(),
+        //        preview: previewCard.ToAttachment());
+
+        //    //return attachment.ToComposeExtensionAttachment();
+        //    //return parseResult.Card.
+
+        //    //var welcomeMessage = Activity.CreateMessageActivity();
+        //    //welcomeMessage.Attachments.Add(attachment);
+
+
+
+        //    //return card
+        //    //    .ToAttachment()
+        //    //    .ToComposeExtensionAttachment();
+        //}
+
+        //private static ComposeExtensionAttachment GetAttachment(string title, string body)
+        //{
+        //    string json = cardJson.Replace("**replace here**", body);
+        //    var parseResult = AdaptiveCard.FromJson(json);
+        //    var attachment = new Attachment
+        //    {
+        //        ContentType = AdaptiveCard.ContentType,
+        //        Content = parseResult.Card,
+        //    };
+        //    attachment.Name = "name";
+
+        //    return attachment.ToComposeExtensionAttachment();
+        //    //return parseResult.Card.
+
+        //    //var welcomeMessage = Activity.CreateMessageActivity();
+        //    //welcomeMessage.Attachments.Add(attachment);
+
+
+        //    //var card = new A
+        //    //var card = new ThumbnailCard
+        //    //{
+        //    //    Title = !string.IsNullOrWhiteSpace(title) ? title : Faker.Lorem.Sentence(),
+        //    //    Text = body,
+        //    //   //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
+        //    //};
+
+        //    //return card
+        //    //    .ToAttachment()
+        //    //    .ToComposeExtensionAttachment();
+        //}
     }
 }
