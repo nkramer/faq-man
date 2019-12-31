@@ -47,9 +47,9 @@ Thx.
 Thx.
 "),
                 GetAttachment("Roadmap",
-                @"Our roadmap is available at _________________, please let me know if you have any questions."),
+                @"Our roadmap is available at [here](https://microsoft.sharepoint.com/:x:/r/teams/skypespacesteamnew/_layouts/15/Doc.aspx?sourcedoc=%7BF8198243-EEDB-4E51-B6FD-BF3D5894EED0%7D&file=Roadmap.xlsx&action=default&mobileredirect=true), start with the tab on the left. Please let me know if you have any questions, thx."),
 
-                GetAttachment("Not planned", "We do not currently have plans to build that feature."),
+                GetAttachment("Not planned", "We do not currently have plans to build that feature. If you'd like to request it, please let me know which customers are blocked, what scenario they are trying to build, and what the expected Platform MAU impact will be. Thx."),
         };
 
             //for (int i = 0; i < 5; i++)
