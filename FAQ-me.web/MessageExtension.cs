@@ -5,6 +5,7 @@ using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Teams;
 using Microsoft.Bot.Connector.Teams.Models;
 using AdaptiveCards;
+using System.Web;
 
 namespace Microsoft.Teams.Samples.HelloWorld.Web
 {
@@ -49,8 +50,15 @@ Thx.
                 GetAttachment("Roadmap",
                 @"Our roadmap is available at [here](https://microsoft.sharepoint.com/:x:/r/teams/skypespacesteamnew/_layouts/15/Doc.aspx?sourcedoc=%7BF8198243-EEDB-4E51-B6FD-BF3D5894EED0%7D&file=Roadmap.xlsx&action=default&mobileredirect=true), start with the tab on the left. Please let me know if you have any questions, thx."),
 
-                GetAttachment("Not planned", "We do not currently have plans to build that feature. If you'd like to request it, please let me know which customers are blocked, what scenario they are trying to build, and what the expected Platform MAU impact will be. Thx."),
-        };
+                GetAttachment("Not planned", 
+                "We do not currently have plans to build that feature. If you would like to request it, please let me know which customers are blocked, what scenario they are trying to build, and what the expected Platform MAU impact will be. Thx."),
+
+                            GetAttachment("beta in production",
+                @"Can I use the beta Teams Graph APIs in production? Yes, with caveats. We hold beta APIs to the same reliability standards as V1, and address live site issues promptly. The big difference between beta and V1 is support and breaking changes:
+- Microsoft Support will not support beta APIs. 
+- We try not to break beta because lots of people are using them in production, but sometimes we need to make a change. Usually 'break' means 'there is a new way to achieve that scenario' – it's very rare for us to remove functionality without offering a new way of achieving the result. We try to give advanced warning of breaking changes, announced on the [Microsoft Graph blog](https://developer.microsoft.com/en-us/graph/blogs/).
+                "),
+};
 
             //for (int i = 0; i < 5; i++)
             //{
@@ -92,7 +100,7 @@ Thx.
                 //Images = new System.Collections.Generic.List<CardImage> { new CardImage("http://lorempixel.com/640/480?rand=" + DateTime.Now.Ticks.ToString()) }
             };
 
-            string json = cardJson.Replace("**replace here**", body);
+            string json = cardJson.Replace("**replace here**", HttpUtility.JavaScriptStringEncode(body)).Replace("\\r", "");
             AdaptiveCard mainCard = AdaptiveCard.FromJson(json).Card;
 
             return new ComposeExtensionAttachment(
