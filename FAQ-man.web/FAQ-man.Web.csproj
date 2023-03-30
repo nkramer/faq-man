@@ -257,7 +257,7 @@
     <Content Include="Views\Home\First.cshtml" />
     <Content Include="Views\Home\Second.cshtml" />
     <Content Include="Views\Home\Configure.cshtml" />
-    <None Include="Properties\PublishProfiles\nkramer-FAQ-me - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\nkramer-FAQ-man - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

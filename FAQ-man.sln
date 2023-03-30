@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FAQ-me.Web", "FAQ-me.web\FAQ-me.Web.csproj", "{E7A02B0D-A563-4CB8-AC6B-1D85272C5D7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FAQ-man.Web", "FAQ-man.web\FAQ-man.Web.csproj", "{E7A02B0D-A563-4CB8-AC6B-1D85272C5D7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E84CE1F7-CF62-4588-B813-3C6D9741D04E}"
 	ProjectSection(SolutionItems) = preProject
 		.vs\config\applicationhost.config = .vs\config\applicationhost.config
-		FAQ-me.web\Web.config.secrets = FAQ-me.web\Web.config.secrets
+		FAQ-man.web\Web.config.secrets = FAQ-man.web\Web.config.secrets
 	EndProjectSection
 EndProject
 Global
